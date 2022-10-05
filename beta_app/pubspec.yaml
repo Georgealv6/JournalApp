@@ -63,6 +63,7 @@ flutter:
   assets:
     - assets/journalMain.jpg
     - assets/journal.jpg
+    - assets/typewriter_01.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

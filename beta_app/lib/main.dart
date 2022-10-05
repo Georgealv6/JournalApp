@@ -1,4 +1,5 @@
 import 'package:journalapp/UI/journal.dart';
+import 'package:journalapp/UI/profile.dart';
 //import 'package:journalapp/bloc/blocs/user_bloc.dart';
 //import 'package:journalapp/bloc/resources/repository.dart';
 import 'package:journalapp/colors/constants.dart';
@@ -100,21 +101,6 @@ class _Welcome extends State<Welcome> {
     });
   }
 
-  // Future loginUser() async {
-  //   String username = "";
-  //   apiKey = await getApiKey();
-  //   if (apiKey != null) {
-  //     if (apiKey.isNotEmpty) {
-  //       userBloc.loginUser("", "", apiKey);
-  //     } else {
-  //       print("No api key");
-  //     }
-  //   } else {
-  //     apiKey = "";
-  //   }
-  //   return apiKey;
-  // }
-
   Future getApiKey() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString("API_Token");
@@ -190,10 +176,23 @@ class _Welcome extends State<Welcome> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 40, right: 30),
+                  padding: const EdgeInsets.only(bottom: 50, left: 10),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
+                      TextButton(
+                        child: const Text(
+                          "Profile",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return ProfilePage();
+                            },
+                          ));
+                        },
+                      ),
                       TextButton(
                         child: const Text(
                           "Logout?",
@@ -202,10 +201,10 @@ class _Welcome extends State<Welcome> {
                         onPressed: () {
                           logout();
                         },
-                      )
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           )

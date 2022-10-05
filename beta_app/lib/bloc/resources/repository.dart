@@ -10,4 +10,6 @@ class Repository {
 
   Future loginUser(String username, String password) =>
       apiProvider.loginUser(username, password);
+
+  Future getJournalEntry(String apiKey) => apiProvider.getJournalEntry(apiKey);
 }

@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request
-from Model import db, User
+from Models import db, User
 import random
 import string
 
@@ -13,7 +13,7 @@ class Login(Resource):
     
         user = User.query.filter_by(username=json_data['username']).first()
         if not user:
-            return{ 'message': 'Username does nor exist'}, 400
+            return{ 'message': 'Username does not exist'}, 400
 
         if user.password != json_data['password']:
             return {'message': 'Password incorrect'}, 400

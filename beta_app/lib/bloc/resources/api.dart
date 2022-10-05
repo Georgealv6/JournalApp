@@ -48,34 +48,31 @@ class ApiProvider {
     }
   }
 
-  // Future<List<Task>> getUserTasks(String apiKey) async {
-  //   final response = await client
-  //       .get("http://127.0.0.1:5000/api/tasks",
-  //       headers: {
-  //         "Authorization" : apiKey
-  //       },
-  //       );
-  //   final Map result = json.decode(response.body);
-  //   if (response.statusCode == 201) {
-  //     // If the call to the server was successful, parse the JSON
-  //     List<Task> tasks = [];
-  //     for (Map json_ in result["data"]) {
-  //       try {
-  //         tasks.add(Task.fromJson(json_));
-  //       }
-  //       catch (Exception) {
-  //         print(Exception);
-  //       }
-  //     }
-  //     for (Task task in tasks) {
-  //       print(task.taskId);
-  //     }
-  //     return tasks;
-  //   } else {
-  //     // If that call was not successful, throw an error.
-  //     throw Exception('Failed to load tasks');
-  //   }
-  // }
+  Future<List<Journal>> getUserTasks(String apiKey) async {
+    final response = await client.get(
+      "http://127.0.0.1:5000/api/journal",
+      headers: {"Authorization": apiKey},
+    );
+    final Map result = json.decode(response.body);
+    if (response.statusCode == 201) {
+      // If the call to the server was successful, parse the JSON
+      List<Journal> tasks = [];
+      for (Map json_ in result["data"]) {
+        try {
+          tasks.add(Journal.fromJson(json_));
+        } catch (Exception) {
+          print(Exception);
+        }
+      }
+      for (Journal entry in entries) {
+        print(entry.entryId);
+      }
+      return tasks;
+    } else {
+      // If that call was not successful, throw an error.
+      throw Exception('Failed to load tasks');
+    }
+  }
 
   // Future addUserTask(String apiKey, String taskName, String deadline) async {
   //   final response = await client

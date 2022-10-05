@@ -34,38 +34,29 @@ class User(db.Model):
             'emailaddress' : self.emailaddress,
         }
 
-class Task(db.Model):
-    __tablename__ = 'tasks'
+class Journal(db.Model):
+    __tablename__ = 'journal'
 
     id = db.Column(db.Integer(), primary_key=True)
     user_id = db.Column(db.Integer(), db.ForeignKey('users.id'))
-    title = db.Column(db.String())
+    entry = db.Column(db.String())
     note = db.Column(db.String())
     completed = db.Column(db.Boolean(), default=False, nullable=False)
-    repeats = db.Column(db.String())
-    deadline = db.Column(db.String())
-    reminders = db.Column(db.String())
 
-    def __init__(self, title, user_id, note, completed, repeats, deadline, reminders):
-        self.title = title
+    def __init__(self, user_id, entry, note, completed):
         self.user_id = user_id
-        self.deadline = deadline
-        self.reminders = reminders
-        self.completed = completed
+        self.entry = entry
         self.note = note
-        self.repeats = repeats
+        self.completed = completed
 
     def __repr__(self):
         return '<id {}>'.format(self.id)
 
     def serialize(self):
         return {
-            'title' : self.title,
             'user_id' : self.user_id,
             'id' : self.id,
-            'repeats' : self.repeats,
-            'deadline' : self.deadline,
-            'reminders' : self.reminders,
-            'completed' : self.completed,
+            'entry' : self.entry,
             'note' : self.note,
+            'completed' : self.completed,
         }
